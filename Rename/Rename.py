@@ -70,14 +70,31 @@ def renameFiles() :
         menu()
 
     def removeWhiteSpace(file) :
-        """Removes white space from file names."""
+        """Removes white space from a given filename."""
 
         try :
-            # Remove white space from file names
             newFile = file.replace(" ","")
 
             if( newFile != file) :
-                os.rename(file,newFile)
+                os.rename(file, newFile)
+
+        except :
+              print('\nSorry, there was an error')
+              input('Press Enter to return to the menu')
+              menu()
+
+        clearConsole()
+        print('\nFilenames successfully renamed')
+        menu()
+
+    def removeHyphen(file) :
+        """Removes hypens from a given filename."""
+
+        try :
+            newFile = file.replace("-","")
+
+            if( newFile != file) :
+                os.rename(file, newFile)
 
         except :
               print('\nSorry, there was an error')
@@ -91,10 +108,14 @@ def renameFiles() :
     for file in os.listdir() :
 
         print('\nEnter \'W\' to remove white space')
+        print('Enter \'H\' to remove hypens')
         renameType = input().upper()
 
         if renameType == 'W' :
             removeWhiteSpace(file)
+
+        elif renameType == 'H' :
+            removeHyphen(file)
 
         else :
             clearConsole()
